@@ -14,14 +14,14 @@ def run(pl):
     for l in links:
         # converts the link to a YouTube object
         yt = YouTube(l)
-        # filters out all non-audio streams
-        music = yt.streams.filter(only_audio=True).all()
+        # takes first stream; since ffmpeg will convert to mp3 anyway
+        music = yt.streams.first()
         # gets the filename of the first audio stream
-        default_filename = music[0].default_filename
+        default_filename = music.default_filename
         print("Downloading " + default_filename + "...")
         # downloads first audio stream
-        music[0].download()
-        # creates mp3 filename for downloaded mp4 file
+        music.download()
+        # creates mp3 filename for downloaded file
         new_filename = default_filename[0:-3] + "mp3"
         print("Converting to mp3....")
         # converts mp4 audio to mp3 audio
