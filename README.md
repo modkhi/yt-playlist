@@ -6,7 +6,7 @@ This script will download the audio of every song in a YouTube playlist, then co
 Please let me know if there are any bugs.
 
 ## Packages and versions
-- pytube==12.1.0+
+- pytube==12.1.0
 
 ## Installation
 1. git clone ``https://github.com/Charlzk05/yt-playlist.git`` or download the source code
