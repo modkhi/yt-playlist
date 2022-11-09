@@ -1,11 +1,9 @@
 import os, shutil, subprocess
-
 from pytube import Playlist, YouTube
 
 def run(pl):
     # insert the downloads destination (optional)
-    # INCLUDE LAST SLASH AFTER FOLDER NAME
-    # e.g. /home/username/Folder/ or C:\Users\Username\Folder\
+    # e.g. C:\Users\Username\Folder
     filepath = input("Downloads destination (optional): ")
     
     # get linked list of links in the playlist
@@ -35,19 +33,31 @@ def run(pl):
             os.rename(default_filename, default_filename_remove_spaces)
         except:
             pass
-        
+            
         # replaces mp4 with mp3 for ffmeg output
         new_filename = default_filename.replace("mp4", "mp3")
         new_filename_remove_spaces = new_filename.replace(" ", "")
         print("Converting to mp3....")
         
-        print(new_filename_remove_spaces)
-        
         # converts mp4 video to mp3 audio and moving the audio to folder input
+        # NOTE: MUST HAVE "ffmpeg.exe" DOWNLOADED AND PLACED INSIDE THE DIRECTORY
         subprocess.call(f"ffmpeg -i {default_filename_remove_spaces} {new_filename_remove_spaces}", shell=True)
-        shutil.move(new_filename_remove_spaces, {os.path.join(filepath, new_filename_remove_spaces)})
+        # if exception then create download folder if not exists and store the downloaded audios
+        try:
+            # if filepath is empty then create download if not exists and store the downloaded audios
+            if filepath == "":
+                shutil.move(new_filename_remove_spaces, os.path.join(os.path.abspath("./Downloads"), new_filename_remove_spaces))
+            else:
+                shutil.move(new_filename_remove_spaces, os.path.join(os.path.abspath(filepath), new_filename_remove_spaces))
+        except:
+            if os.path.exists("./Downloads"):
+                shutil.move(new_filename_remove_spaces, os.path.join(os.path.abspath("./Downloads"), new_filename_remove_spaces))
+            else:
+                os.makedirs("./Downloads")
+                shutil.move(new_filename_remove_spaces, os.path.join(os.path.abspath("./Downloads"), new_filename_remove_spaces))
+        os.remove(default_filename_remove_spaces)
         
-        # Old Code:
+        # Old Code
         """
         subprocess.run(['ffmpeg', '-i', 
             os.path.join(filepath, default_filename),
