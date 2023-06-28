@@ -9,7 +9,7 @@ Please let me know if there are any bugs.
 - pytube==12.1.0
 
 ## Installation
-1. git clone ``https://github.com/Charlzk05/yt-playlist.git`` or download the source code
+1. git clone ``https://github.com/modkhi/yt-playlist.git`` or download the source code
 2. navigate to the folder
 3. do ``pip install -r requirements.txt`` to install the package from requirements.txt
 4. do ``py yt-playlist-download.py``
@@ -20,5 +20,3 @@ Please let me know if there are any bugs.
     - e.g. ``https://www.youtube.com/playlist?list=OLAK5uy_lbX9HmX4ZrMSrS5wpDonp-EFy4IrhQeCc``
 - ``Downloads destination (optional): `` - must insert the full path
     - e.g. ``C:\Users\Username\Folder``
-
-### Updated by Charlzk05 on Nov 9, 2022
